@@ -1,0 +1,45 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 22
+    buildToolsVersion "22.0.1"
+
+    defaultConfig {
+        applicationId "com.brianattwell.github"
+        minSdkVersion 22
+        targetSdkVersion 22
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+}
+
+
+// Import the custom gradle plugin.
+// Execute "./gradlew uploadArchives" before you can execute anything on the other side
+buildscript {
+    repositories {
+        maven {
+            url uri('../repo')
+        }
+    }
+    dependencies {
+        classpath group: 'com.brianattwell',
+                name: 'plugin',
+                version: '1.0-SNAPSHOT'
+    }
+}
+
+apply plugin: 'test-plugin'
+task checkitout(type: com.brianattwell.plugin.MyJavaTask) {
+    println("running consumer task!")
+}
