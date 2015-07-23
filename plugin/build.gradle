@@ -16,11 +16,3 @@ dependencies {
 
 group = 'com.brianattwell'
 version = '1.0-SNAPSHOT'
-
-uploadArchives {
-    repositories {
-        mavenDeployer {
-            repository(url: uri('../repo'))
-        }
-    }
-}

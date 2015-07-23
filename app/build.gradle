@@ -28,9 +28,7 @@ dependencies {
 // Execute "./gradlew uploadArchives" before you can execute anything on the other side
 buildscript {
     repositories {
-        maven {
-            url uri('../repo')
-        }
+        mavenLocal()
     }
     dependencies {
         classpath group: 'com.brianattwell',
