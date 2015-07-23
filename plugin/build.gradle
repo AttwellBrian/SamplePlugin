@@ -1,5 +1,10 @@
 apply plugin: 'java'
 
+// This is important for publishing, even if Android Studio claims it isn't
+// used. Android can't interpret Java 8 byte code.
+sourceCompatibility = JavaVersion.VERSION_1_7
+targetCompatibility = JavaVersion.VERSION_1_7
+
 dependencies {
     compile gradleApi()
 }
@@ -10,9 +15,15 @@ repositories {
     mavenCentral()
 }
 
-dependencies {
-    testCompile 'junit:junit:4.11'
-}
-
 group = 'com.brianattwell'
 version = '1.0-SNAPSHOT'
+
+// The following code is optional. If you don't specify this, the repository location
+// will be something like "/Users/brianattwell/.m2/repositories/".
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            repository(url: uri('../repo'))
+        }
+    }
+}
